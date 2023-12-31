@@ -7,7 +7,6 @@ function formatDateTimeFromTicks(nTicks){
     return new Date(nTicks-tmLoc.getTimezoneOffset()*60000).toLocaleString();
 }
 const MessageCard = ({message, editLikeCount, deleteMessage}) => {
-    const [likes, setLikes] = useState(0);
     const likesStr = message?.likes > 1 ? `${message.likes} likes` 
                 : message?.likes === 1 ? `${message.likes} like`
                 : "";
