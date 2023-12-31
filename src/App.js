@@ -32,12 +32,11 @@ const App = () => {
       textAlign: 'center', // Center the content horizontally
     };
     const [messages, setMessages] = useState([]);
-    const [createdAt, setCreatedAt] = useState(0);
-    const [createdBy, setCreatedBy] = useState("");
-    const [likes, setLikes] = useState(0); 
     const [messageText, setMessageText] = useState("");
-    const MessagesCollectionRef = collection(db, "messages");
     const [refreshCount, setRefreshCount] = useState(0);
+
+    const MessagesCollectionRef = collection(db, "messages");
+
     useEffect(() => {
         const getMessages = async () => {
           const data = await getDocs(MessagesCollectionRef);
@@ -45,6 +44,7 @@ const App = () => {
         }
         getMessages();
     }, [refreshCount])
+
     function getCurrentTimeUTC()
     {
         //RETURN:
@@ -75,21 +75,10 @@ const App = () => {
       await deleteDoc(messageDoc)
       setRefreshCount(refreshCount + 1);
     }
-  //   function saveMessage(messageText){
-  //     var message = {
-  //         createdAt: getCurrentTimeUTC(),
-  //         messageText: messageText,
-  //         createdBy: "Anonymous User",
-  //         likes: 0,
-  //         liked: false
-  //     }
-  //     //var newMessageRef = messagesRef.push();
-  //     setMessages([...messages, message]);
-  //     //newMessageRef.set(message);
-  // }
+    // when submit button is pressed:
     function handleSubmit(e) {
       e.preventDefault();
-      var form = document.getElementById('messageForm'); //fix for react
+      var form = document.getElementById('messageForm'); 
       form.classList.add('was-validated');
       if (form.checkValidity() === false) {
           e.stopPropagation();
@@ -116,11 +105,8 @@ const App = () => {
         }
         
         return messages.sort( compare );
-  
-  }
-    // const handleSort = (messages) => {
-    //   return messages.sort((a, b) => a.createdAt.localeCompare(b.createdAt));
-    // };
+    }
+   
     return (
         <div className ="app" style={containerStyles}>
             <h1>Welcome Users!</h1>
